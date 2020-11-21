@@ -1,16 +1,46 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+<!-- 
+ Курс "DEV-j210. Java EE. Разработка веб-сервисов".
+ Стартовая страница приложения,демонстрирующего разработку простого RESTful 
+ веб-сервиса. 
+ (С) Ю.Д.Заковряшин, 2018-2020.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Простой RESTful сервис</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <h1>Пример RESTful сервиса</h1>
+        <p><strong><u>Краткое описание сервиса</u>.</strong><br>
+            Во время своей работы сервис обеспечивает запись
+            сообщений пользователей в строковом формате. Каждое сообщение имеет
+            вид "имя_пользователя:сообщение".
+        </p>
+        <p>
+            Имя пользователя, от имени которого вводятся сообщения, определяется
+            командой "Регистрация". После успешной регистрации на следующей 
+            форме пользователь может определять параметры и выполять запросы 
+            "Добавить сообщение", "Изменить сообщение", "Удалить сообщение" и 
+            "Получить все сообщения".
+        </p>
+        <p>
+            Для выхода из приложения или смены имени пользователя следует 
+            выполнить команду "Выйти".
+        </p>
+        <form action="Start" method="GET">
+            <table>
+                <tr>
+                    <td style="text-align: right;">User:</td>
+                    <td><input type="text" name="user" size="24"/></td>
+                    <td ><input type="submit" name="register" value="Регистрация"/></td>
+                </tr>
+            </table>
+        </form>
+        <hr style="width: 90%; align-items: center"/>
+        <p style="font-size:10pt; color:darkgray; text-align:center;">
+            &copy;Ю.Д.Заковряшин, 2020
+        </p>
     </body>
 </html>
