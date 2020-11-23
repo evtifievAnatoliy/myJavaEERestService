@@ -7,10 +7,27 @@ and open the template in the editor.
 <html>
     <head>
         <title>TODO supply a title</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <form action="RSServlet" method="POST">
+            <div class="center">    
+                    <h1>JAVA210</h1>
+                </div>
+                <!------------------------------------------>
+                <div class="center"><p>----------------------------------</p></div>
+                
+                <div class="center">Введите имя подкаталога :</div>
+                <div class="center"><input  type="text" name="fieldSubCatalog"/></div>
+                <div class="center"><input type="submit" value="Отправить сообщение" name="sendSubCatalogBtn"/></div>
+                <div class="center"><p>-----------------------------------</p></div>
+                
+                <div class="center">Введите имя файла:</div>
+                <div class="center"><input class="center" type="text" name="fieldFile"/></div>
+                <div class="center"><input style="text-align: left; margin-top: 2px;" type="submit" value="Получить сообщение по номеру" name="getFileBtn"/></div>
+                
+        </form>
     </body>
 </html>
