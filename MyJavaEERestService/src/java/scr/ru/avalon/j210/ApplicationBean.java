@@ -63,6 +63,22 @@ public class ApplicationBean {
         
     }
     
+//    @PUT
+//    @Path("/setDirectory")
+//    @Consumes("text/html")
+//    public String setDirectory(@QueryParam("dirName") String dirName){
+//        
+//        if (!dirName.trim().isEmpty()){
+//            if(dirctoryBean.setMainDir(dirName))
+//                return "Каталог изменен";
+//            else
+//                return "Ошибка изменения каталога";
+//        }
+//        else
+//            return"setDirectoryt error";
+//
+//    }
+    
         
 //    private Map<String, Type> mapMainDir;
 //    

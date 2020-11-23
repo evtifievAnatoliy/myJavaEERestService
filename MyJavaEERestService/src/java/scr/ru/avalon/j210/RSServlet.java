@@ -12,6 +12,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
@@ -27,26 +32,46 @@ public class RSServlet extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         
-        String subCatalog = request.getParameter("fieldSubCatalog");
+        
+        
+        
+        String catalog = request.getParameter("fieldSubCatalog");
         String file = request.getParameter("fieldFile");
         
+        Object changeCatalogBtn = request.getParameter("changeCatalogBtn");
         Object sendSubCatalogBtn = request.getParameter("sendSubCatalogBtn");
         Object getFileBtn = request.getParameter("getFileBtn");
         
         
+//        if (changeCatalogBtn != null) {
+//            
+//                Client client = ClientBuilder.newClient();
+//                String url = "http://localhost:8080/MyJavaEERestService/resources/directory/" +
+//                        "setDirectory?dirName=" + catalog;
+//                WebTarget target = client.target(url);
+//                Invocation.Builder builder = target.request(MediaType.TEXT_HTML);
+//                String reply = builder.get(String.class);
+//                client.close();
+//                outHttpResponse(response, reply);
+//                return;
+//                
+//            
+//        }
         
         if (sendSubCatalogBtn != null) {
             
-            if (subCatalog.trim().isEmpty()) {
-                // Если строка "пустая", то пользователь переадресуется на 
-                // стартовую страницу приложения. 
-                outHttpResponse(response, "Пожалуста введите имя Подкаталога");
-                return;
-            } else {
-                outHttpResponse(response, "Состав Подкаталога: " + subCatalog);
+                Client client = ClientBuilder.newClient();
+                String url = "http://localhost:8080/MyJavaEERestService/resources/directory/" +
+                        "getContext?dirName=" + catalog;
+                WebTarget target = client.target(url);
+                Invocation.Builder builder = target.request(MediaType.TEXT_HTML);
+                String reply = builder.get(String.class);
+                client.close();
+                outHttpResponse(response, "Состав Подкаталога: " + catalog + "\n" 
+                        + reply);
                 return;
                 
-            }
+            
         }
 
         if (getFileBtn != null) {
@@ -57,8 +82,14 @@ public class RSServlet extends HttpServlet {
                 outHttpResponse(response, "Пожалуста введите имя файла");
                 return;
             } else {
-                
-                outHttpResponse(response, "Ответ RSService для подкаталога: " + subCatalog + " и файла: " + file);
+                Client client = ClientBuilder.newClient();
+                String url = "http://localhost:8080/MyJavaEERestService/resources/directory/" +
+                        "findFile?dirName=" + catalog + "&fileName=" + file;
+                WebTarget target = client.target(url);
+                Invocation.Builder builder = target.request(MediaType.TEXT_HTML);
+                String reply = builder.get(String.class);
+                client.close();
+                outHttpResponse(response, reply);
                 
                 return;
             }
@@ -79,7 +110,7 @@ public class RSServlet extends HttpServlet {
             out.println("<body>");
             // Вывод подтверждения о добавлении полученного сообщения msg 
             // к коллекции сообщений.
-            out.println("<p>Сообщение от Bean: \'" + str + "\'</p>");
+            out.println("<p>Сообщение от RSService: \'" + str + "\'</p>");
             // Вывод числа обращений к данному методу.
             // Вывод кнопки возврата на стартовую страницу.
             out.println(goBack());

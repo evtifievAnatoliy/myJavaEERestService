@@ -36,8 +36,11 @@ public interface IDirectory {
         FILE;
     }
     
+//    public boolean setMainDir(String mainDir);
+//    
     public Map<String, Type> getContent(String dirName);
     
     public Map<String, Type> findFile(String dirName, String fileName);
+    
     
 }

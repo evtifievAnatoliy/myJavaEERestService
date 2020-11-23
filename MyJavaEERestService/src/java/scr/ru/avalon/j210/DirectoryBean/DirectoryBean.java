@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
 import javax.ejb.Stateless;
 import javax.ws.rs.Path;
 
@@ -17,7 +18,9 @@ public class DirectoryBean implements IDirectory{
     
     private Map<String, Type> mapMainDir;
     
-    private final String mainDir = "D:/Test";
+    private String mainDir = "D:/Test";
+
+    
     
     @PostConstruct
     public void init(){
@@ -27,6 +30,18 @@ public class DirectoryBean implements IDirectory{
             mapMainDir = addNewFilesFromDir(dir);
         }
     }
+    
+//    @Override
+//    public boolean setMainDir(String mainDir) {
+//        
+//        File file = new File(mainDir);
+//        if (file.exists() && file.isDirectory()){
+//            this.mainDir = mainDir;
+//            return true;
+//        }
+//        else
+//            return false;
+//    }
     
     @Override
     public Map<String, Type> getContent(String dirName) {
@@ -53,7 +68,7 @@ public class DirectoryBean implements IDirectory{
         Map<String, Type> map = new HashMap<>();
         if (dirName.trim().isEmpty() && !fileName.trim().isEmpty()){
             File file = new File(mainDir + "/" + fileName);
-            if (file.exists()){
+            if (file.exists() && file.isFile()){
                 map.put(file.getName(), Type.FILE);
             }
             else
